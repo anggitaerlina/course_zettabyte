@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Purchase</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 600px;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+        }
+        label {
+            display: block;
+            margin: 10px 0;
+            color: #555;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+        }
+        button {
+            background-color: #dd7ac4;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        button:hover {
+            background-color: #65a4ce;
+        }
+        h2 {
+            margin-top: 20px;
+            color: #333;
+        }
+        p {
+            color: #555;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <h1>Book List</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Book Title</th>
+                <th>Price (IDR)</th>
+                <th>Stock</th>
+                <th>Tax (%)</th>
+            </tr>
+        </thead>
+        <tbody id="bookTableBody">
+            <!-- Add book entries dynamically using JavaScript -->
+        </tbody>
+    </table>
+
+    <h2>Book Purchase</h2>
+
+    <label for="bookTitle">Book Title:</label>
+    <input type="text" id="bookTitle" placeholder="Enter book title">
+
+    <label for="bookPrice">Book Price (IDR):</label>
+    <input type="number" id="bookPrice" placeholder="Enter book price">
+
+    <label for="discountPercentage">Discount Percentage:</label>
+    <input type="number" id="discountPercentage" placeholder="Enter discount percentage">
+
+    <label for="taxPercentage">Tax Percentage:</label>
+    <input type="number" id="taxPercentage" placeholder="Enter tax percentage">
+
+    <label for="quantity">Quantity:</label>
+    <input type="number" id="quantity" placeholder="Enter quantity">
+
+    <button onclick="calculatePrice()">Purchase</button>
+
+    <h2>Purchase Details</h2>
+    <p id="purchaseDetails"></p>
+
+    
+</div>
+
+<script>
+    const bookList = [
+        { title: 'Book 1', price: 100000, stock: 5, tax: 5 },
+        { title: 'Book 2', price: 75000, stock: 10, tax: 2 },
+        { title: 'Book 3', price: 120000, stock: 8, tax: 3 },
+        { title: 'Book 4', price: 90000, stock: 15, tax: 2 },
+        { title: 'Book 5', price: 110000, stock: 12, tax: 4 },
+        // Add more books as needed
+    ];
+
+    function displayBookList() {
+        const bookTableBody = document.getElementById('bookTableBody');
+
+        bookList.forEach(book => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${book.title}</td>
+                <td>${formatCurrency(book.price)}</td>
+                <td>${book.stock}</td>
+                <td>${book.tax}%</td>
+            `;
+            bookTableBody.appendChild(row);
+        });
+    }
+
+    function formatCurrency(amount) {
+        return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(amount);
+    }
+
+    displayBookList(); // Call the function to display the book list
+
+    function calculatePrice() {
+        const bookTitle = document.getElementById('bookTitle').value;
+        const quantity = parseInt(document.getElementById('quantity').value);
+        const selectedBook = bookList.find(book => book.title === bookTitle);
+
+        if (selectedBook && quantity > 0 && quantity <= selectedBook.stock) {
+            // Perform calculations
+            const bookPrice = selectedBook.price;
+            const discountPercentage = parseFloat(document.getElementById('discountPercentage').value);
+            const taxPercentage = parseFloat(document.getElementById('taxPercentage').value);
+
+            const discountAmount = (discountPercentage / 100) * bookPrice;
+            const priceAfterDiscount = bookPrice - discountAmount;
+
+            const taxAmount = (taxPercentage / 100) * priceAfterDiscount;
+            const priceAfterTax = priceAfterDiscount + taxAmount;
+
+            const originalPrice = quantity * bookPrice;
+            const totalDiscount = quantity * discountAmount;
+            const totalPriceAfterDiscount = quantity * priceAfterDiscount;
+            const totalPriceAfterTax = quantity * priceAfterTax;
+
+            // Update stock after purchase
+            selectedBook.stock -= quantity;
+
+            const purchaseDetails = `
+                Book Title: ${bookTitle}<br>
+                Quantity: ${quantity}<br>
+                Original Price: ${formatCurrency(originalPrice)}<br>
+                Total Discount: ${formatCurrency(totalDiscount)}<br>
+                Price After Discount: ${formatCurrency(totalPriceAfterDiscount)}<br>
+                Price After Tax: ${formatCurrency(totalPriceAfterTax)}<br>
+                Remaining Stock: ${selectedBook.stock} ${selectedBook.stock > 0 ? '(Can be bought again)' : '(Out of stock)'}
+            `;
+
+            document.getElementById('purchaseDetails').innerHTML = purchaseDetails;
+        } else {
+            document.getElementById('purchaseDetails').innerHTML = 'Invalid input or insufficient stock.';
+        }
+    }
+</script>
+
+</body>
+</html>

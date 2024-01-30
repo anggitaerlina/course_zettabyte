@@ -1,0 +1,76 @@
+body {
+    background-color: #facee3;
+    color: #333;
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+h1 {
+    text-align: center;
+}
+
+p {
+    line-height: 1.5;
+    margin-left: 40px;
+    margin-right: 40px;
+}
+
+.back-button {
+    display: block;
+    margin: 20px;
+    padding: 10px 20px;
+    background-color: #ffffff;
+    color: rgb(221, 116, 195);
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.back-button i {
+    margin-right: 5px;
+}
+
+.social-icons {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.social-icons a {
+    display: inline-block;
+    margin: 0 10px;
+    color: rgb(221, 116, 195);
+    text-decoration: none;
+    font-size: 24px;
+}
+
+/* Styles specific to the Hobby page */
+.hobby-section {
+    text-align: center;
+}
+
+.hobby-row {
+    display: flex;
+    justify-content: center;
+}
+
+.hobby-item {
+    margin: 20px; /* Adjusted margin for consistent spacing */
+    text-align: center;
+}
+
+.hobby-section img {
+    width: 300px; /* Set a fixed width for the images */
+    height: 400px; /* Set a fixed height for the images (4:3 aspect ratio) */
+    border-radius: 10%;
+    margin-bottom: 10px; /* Adjusted margin for consistent spacing */
+}
+
+.hobby-name {
+    font-weight: bold;
+    margin-top: 10px;
+    color: rgb(221, 116, 195);
+}
+
+.hobby-description {
+    margin-top: 10px; 
+    color: #ffffff;
+}

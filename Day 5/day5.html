@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Compare Favorite Books</title>
+</head>
+<body>
+
+  <h1>Compare Favorite Books</h1>
+
+  <p>Favorite Book 1: <span id="favoriteBook1"></span></p>
+  <p>Favorite Book 2: <span id="favoriteBook2"></span></p>
+
+  <label for="addBook1">Add to Favorite Book 1:</label>
+  <input type="text" id="addBook1" placeholder="Enter new book titles">
+  <button onclick="addFavoriteBook(1)">Add</button>
+  <button onclick="removeFavoriteBook(1)">Remove</button>
+
+  <label for="addBook2">Add to Favorite Book 2:</label>
+  <input type="text" id="addBook2" placeholder="Enter new book titles">
+  <button onclick="addFavoriteBook(2)">Add</button>
+  <button onclick="removeFavoriteBook(2)">Remove</button>
+
+  <button onclick="compareBooks()">Compare Books</button>
+
+  <p id="result"></p>
+
+  <script>
+    function compareBooks() {
+      let favoriteBook1 = document.getElementById("favoriteBook1").textContent;
+      let favoriteBook2 = document.getElementById("favoriteBook2").textContent;
+
+      // Trim and split the book titles into arrays
+      let titlesBook1 = favoriteBook1.trim().split(', ').sort();
+      let titlesBook2 = favoriteBook2.trim().split(', ').sort();
+
+      // Use the comparison operator to check if the arrays have the same values
+      let areBooksSame = titlesBook1.length === titlesBook2.length &&
+                         titlesBook1.every((title, index) => title === titlesBook2[index]);
+
+      // Display the result
+      let resultElement = document.getElementById("result");
+      resultElement.textContent = "Are the favorite books the same? " + areBooksSame;
+    }
+
+    function addFavoriteBook(bookNumber) {
+      let addBookInput = document.getElementById("addBook" + bookNumber);
+      let addedTitles = addBookInput.value;
+
+      if (bookNumber === 1) {
+        let favoriteBook1Element = document.getElementById("favoriteBook1");
+        favoriteBook1Element.textContent += (favoriteBook1Element.textContent ? ', ' : '') + addedTitles;
+      } else if (bookNumber === 2) {
+        let favoriteBook2Element = document.getElementById("favoriteBook2");
+        favoriteBook2Element.textContent += (favoriteBook2Element.textContent ? ', ' : '') + addedTitles;
+      }
+
+      // Clear the input field
+      addBookInput.value = "";
+    }
+
+    function removeFavoriteBook(bookNumber) {
+      let removeBookInput = document.getElementById("addBook" + bookNumber);
+      let removeTitles = removeBookInput.value;
+
+      if (bookNumber === 1) {
+        let favoriteBook1Element = document.getElementById("favoriteBook1");
+        let titlesBook1 = favoriteBook1Element.textContent.split(', ');
+        titlesBook1 = titlesBook1.filter(title => !removeTitles.includes(title));
+        favoriteBook1Element.textContent = titlesBook1.join(', ');
+      } else if (bookNumber === 2) {
+        let favoriteBook2Element = document.getElementById("favoriteBook2");
+        let titlesBook2 = favoriteBook2Element.textContent.split(', ');
+        titlesBook2 = titlesBook2.filter(title => !removeTitles.includes(title));
+        favoriteBook2Element.textContent = titlesBook2.join(', ');
+      }
+
+      // Clear the input field
+      removeBookInput.value = "";
+    }
+  </script>
+
+</body>
+</html>

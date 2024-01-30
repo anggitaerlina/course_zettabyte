@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multiple Tables</title>
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 50%;
+      margin: 20px auto;
+    }
+
+    th, td {
+      border: 1px solid black;
+      padding: 8px;
+      text-align: left;
+    }
+
+    /* The first row of the Hobby table has a green background */
+    table:nth-child(2) tr:nth-child(1) {
+      background-color: green;
+    }
+
+    /* The first row of the Favorites Movies table has a red background */
+    table:nth-child(3) tr:nth-child(1) {
+      background-color: red;
+    }
+
+    /* The first row of the Favorites Songs table has a blue background */
+    table:nth-child(4) tr:nth-child(1) {
+      background-color: blue;
+    }
+
+    h1 {
+      text-align: center;
+      color: purple;
+    }
+  </style>
+</head>
+<body>
+  <h1>Favorite Things</h1>
+
+  <!-- Table 1: Hobby -->
+  <table>
+    <caption>Hobby</caption>
+    <tr>
+      <th>Hobby</th>
+      <th>Description</th>
+    </tr>
+    <tr>
+      <td>Reading</td>
+      <td>Enjoying a good book</td>
+    </tr>
+    <tr>
+      <td>Hiking</td>
+      <td>Exploring nature trails</td>
+    </tr>
+    <tr>
+      <td>Cooking</td>
+      <td>Trying out new recipes</td>
+    </tr>
+    <tr>
+      <td>Photography</td>
+      <td>Capturing moments through a lens</td>
+    </tr>
+    <tr>
+      <td>Painting</td>
+      <td>Expressing creativity on canvas</td>
+    </tr>
+  </table>
+
+  <!-- Table 2: Favorites Movies -->
+  <table>
+    <caption>Favorites Movies</caption>
+    <tr>
+      <th>Title</th>
+      <th>Year</th>
+    </tr>
+    <tr>
+      <td>Enola Holmes</td>
+      <td>2020</td>
+    </tr>
+    <tr>
+      <td>Spider-Man: No Way Home</td>
+      <td>2021</td>
+    </tr>
+    <tr>
+      <td>Raya and the Last Dragon</td>
+      <td>2021</td>
+    </tr>
+    <tr>
+      <td>Tomb Raider 2</td>
+      <td>2021</td>
+    </tr>
+    <tr>
+      <td>Avatar: The Way of Water</td>
+      <td>2022</td>
+    </tr>
+    <tr>
+      <td>Top Gun: Maverick</td>
+      <td>2022</td>
+    </tr>
+    <tr>
+        <td>Wonka</td>
+        <td>2023</td>
+    </tr>
+    <tr>
+      <td>The Marvels</td>
+      <td>2023</td>
+    </tr>
+    <tr>
+      <td>The Little Mermaid</td>
+      <td>2023</td>
+    </tr>
+    <tr>
+      <td>Transformers: Rise of the Beasts</td>
+      <td>2023</td>
+    </tr>
+  </table>
+
+  <!-- Table 3: Favorites Songs -->
+  <table>
+    <caption>Favorites Songs</caption>
+    <tr>
+      <th>Title</th>
+      <th>Artist</th>
+    </tr>
+    <tr>
+      <td>Young and Beautiful</td>      
+      <td>Lana Del Rey</td>
+    </tr>
+    <tr>
+      <td>Cinnamon Girl</td>
+      <td>Lana Del Rey</td>
+    </tr>
+    <tr>
+      <td>Enchanted</td>
+      <td>Taylor Swift</td>
+    </tr>
+    <tr>
+        <td>Delicate</td>
+        <td>Taylor Swift</td>
+    </tr>
+    <tr>
+      <td>Backburner</td>
+      <td>NIKI</td>
+    </tr>
+    <tr>
+      <td>Take A Chance With Me</td>
+      <td>NIKI</td>
+    </tr>
+    <tr>
+      <td>Comethru</td>
+      <td>Jeremy Zucker</td>
+    </tr>
+    <tr>
+      <td>Winter Things</td>
+      <td>Ariana Grande</td>
+    </tr>
+    <tr>
+        <td>Style</td>
+        <td>Taylor Swift</td>
+    </tr>
+    <tr>
+        <td>Cardigan</td>
+        <td>Taylor Swift</td>
+    </tr>
+  </table>
+</body>
+</html>

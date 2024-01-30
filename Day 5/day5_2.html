@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>List of Favorite Books</title>
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 50%;
+      margin: 20px;
+    }
+
+    th, td {
+      border: 1px solid black;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+<body>
+
+<script>
+  var favoriteBook1 = [
+    { title: 'The Mountain is You', price: 282000 },
+    { title: 'This is How You Heal', price: 150000 },
+    { title: '101 Essays', price: 645000 },
+  ];
+
+  var favoriteBook2 = [
+    { title: 'The Catcher in the Rye', price: 480000 },
+    { title: 'To Kill a Mockingbird', price: 722000 },
+    { title: 'Why We Sleep', price: 325000 },
+  ];
+
+ 
+  var highestPriceVar1 = Math.max(...favoriteBook1.map(book => book.price));
+  var highestPriceVar2 = Math.max(...favoriteBook2.map(book => book.price));
+
+
+  var averagePriceVar1 = favoriteBook1.reduce((total, book) => total + book.price, 0) / favoriteBook1.length;
+  var averagePriceVar2 = favoriteBook2.reduce((total, book) => total + book.price, 0) / favoriteBook2.length;
+
+
+  var priceStatusVar1 = averagePriceVar1 > 500000 ? "Expensive" : "Cheap";
+  var priceStatusVar2 = averagePriceVar2 > 500000 ? "Expensive" : "Cheap";
+
+
+  document.write('<h2>Favorite Book 1</h2>');
+  document.write('<table>');
+  document.write('<tr><th>Title</th><th>Price</th></tr>');
+  favoriteBook1.forEach(book => {
+    document.write(`<tr><td>${book.title}</td><td>${book.price}</td></tr>`);
+  });
+  document.write('</table>');
+
+  document.write('<h2>Favorite Book 2</h2>');
+  document.write('<table>');
+  document.write('<tr><th>Title</th><th>Price</th></tr>');
+  favoriteBook2.forEach(book => {
+    document.write(`<tr><td>${book.title}</td><td>${book.price}</td></tr>`);
+  });
+  document.write('</table>');
+
+  document.write(`<p>A. Highest Price</p>`);
+  document.write(`<p>Highest price from Book List 1: ${highestPriceVar1}</p>`);
+  document.write(`<p>Highest price from Book List 2: ${highestPriceVar2}</p>`);
+
+
+  if (highestPriceVar1 > highestPriceVar2) {
+    document.write('<p>Book List 1 has the highest price.</p>');
+  } else if (highestPriceVar1 < highestPriceVar2) {
+    document.write('<p>Book List 2 has the highest price.</p>');
+  } else {
+    document.write('<p>Book List 1 and Book List 2 have the same highest price.</p>');
+  }
+
+  document.write(`<p>B. Average Price</p>`);
+  document.write(`<p>Average price from Book List 1: ${averagePriceVar1}</p>`);
+  document.write(`<p>Average price from Book List 2: ${averagePriceVar2}</p>`);
+
+  document.write(`<p>C. Price Status</p>`);
+  document.write(`<p>Price Status of Book List 1: ${priceStatusVar1}</p>`);
+  document.write(`<p>Price Status of Book List 2: ${priceStatusVar2}</p>`);
+</script>
+
+</body>
+</html>

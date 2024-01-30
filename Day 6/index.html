@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Purchase</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 600px;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+        }
+        label {
+            display: block;
+            margin: 10px 0;
+            color: #555;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+        }
+        button {
+            background-color: #e77dde;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        button:hover {
+            background-color: #8ab1ec;
+        }
+        h2 {
+            margin-top: 20px;
+            color: #333;
+        }
+        p {
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Book Purchase</h1>
+
+    <label for="bookTitle">Book Title:</label>
+    <input type="text" id="bookTitle" placeholder="Enter book title">
+
+    <label for="bookPrice">Book Price (IDR):</label>
+    <input type="number" id="bookPrice" placeholder="Enter book price">
+
+    <label for="discountPercentage">Discount Percentage:</label>
+    <input type="number" id="discountPercentage" placeholder="Enter discount percentage">
+
+    <label for="taxPercentage">Tax Percentage:</label>
+    <input type="number" id="taxPercentage" placeholder="Enter tax percentage">
+
+    <button onclick="calculatePrice()">Purchase</button>
+
+    <h2>Purchase Details</h2>
+    <p id="purchaseDetails"></p>
+</div>
+
+<script>
+    function formatCurrency(amount) {
+        return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(amount);
+    }
+
+    function calculatePrice() {
+        const bookTitle = document.getElementById('bookTitle').value;
+        const bookPrice = parseFloat(document.getElementById('bookPrice').value);
+        const discountPercentage = parseFloat(document.getElementById('discountPercentage').value);
+        const taxPercentage = parseFloat(document.getElementById('taxPercentage').value);
+
+        const discountAmount = (discountPercentage / 100) * bookPrice;
+        const priceAfterDiscount = bookPrice - discountAmount;
+
+        const taxAmount = (taxPercentage / 100) * priceAfterDiscount;
+        const priceAfterTax = priceAfterDiscount + taxAmount;
+
+        const purchaseDetails = `
+            Book Title: ${bookTitle}<br>
+            Book Price: ${formatCurrency(bookPrice)}<br>
+            Discount Amount: ${formatCurrency(discountAmount)}<br>
+            Price After Discount: ${formatCurrency(priceAfterDiscount)}<br>
+            Tax Amount: ${formatCurrency(taxAmount)}<br>
+            Price After Tax: ${formatCurrency(priceAfterTax)}
+        `;
+
+        document.getElementById('purchaseDetails').innerHTML = purchaseDetails;
+    }
+</script>
+
+</body>
+</html>
